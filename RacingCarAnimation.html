@@ -1,0 +1,64 @@
+
+<style>
+
+    .flexContainer
+    {
+        position:absolute;
+        right:670px;
+        top:400px;
+    }
+    .racingCar
+    {
+        position:absolute;
+        right:170px;
+        transform:scaleX(-1);
+    }
+</style>
+<img src="images/road.png">
+<div class="flexContainer">
+    <img id="car" class="racingCar" src="images/car.png" >
+    <img id="smoke" src="images/smoke/smoke1.png" style="visibility: hidden;">
+</div>
+
+<script>
+    var smokeImg=document.getElementById('smoke');
+    var smokeFrame=1;
+
+    var carImg=document.getElementById('car');
+
+    function animateSmoke()
+    {
+        smokeImg.style.visibility='visible';
+        smokeImg.src='images/smoke/smoke'+smokeFrame+'.png';
+        if(smokeFrame==4)
+        {
+            moveCarInterval=setInterval(moveCarLeft,100);
+        }
+        if(smokeFrame==6)
+        {
+            smokeImg.style.visibility='hidden';
+            clearInterval(smokeInterval);
+        }
+        smokeFrame=smokeFrame+1;
+    }
+    var smokeInterval=0;
+    var carPozX=10;
+    var speed=20;
+
+    function moveCarLeft()
+    {
+        carImg.style.right=carPozX+'px';
+        if(Math.floor(carPozX%50)==0)
+        {
+            speed=speed+10;
+        }
+        carPozX=carPozX+speed;
+    }
+
+    function startAnimations()
+    {
+        smokeInterval=setInterval(animateSmoke,250)
+    }
+    setTimeout(startAnimations,1000);
+
+</script>
